@@ -10,6 +10,7 @@ class Transaction {
 			this.reason = properties[3];
 			this.amount = parseFloat(properties[4]);
 		} else {
+			const json = obj;
 			this.date = new Date(json["Date"]);
 			this.from = json["From"];
 			this.to = json["To"];
