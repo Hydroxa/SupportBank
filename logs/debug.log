@@ -1,0 +1,76 @@
+[2021-09-29T17:08:37.255] [DEBUG] commandHandler - Hello, World! Logger has intialised
+[2021-09-29T17:08:37.258] [DEBUG] parsing - Attempting to read Transactions2014.csv as a CSV file
+[2021-09-29T17:08:37.258] [DEBUG] parsing - Reading..
+[2021-09-29T17:08:37.258] [DEBUG] parsing - Read complete! (<1ms)
+[2021-09-29T17:08:37.258] [DEBUG] parsing - Received 149 lines
+[2021-09-29T17:08:37.259] [DEBUG] parsing - Attempting to read DodgyTransactions2015.csv as a CSV file
+[2021-09-29T17:08:37.259] [DEBUG] parsing - Reading..
+[2021-09-29T17:08:37.260] [DEBUG] parsing - Read complete! (1ms)
+[2021-09-29T17:08:37.260] [DEBUG] parsing - Received 52 lines
+[2021-09-29T17:08:37.260] [DEBUG] parsing - Line 27 was malformed.
+[2021-09-29T17:08:37.260] [DEBUG] parsing - Line 51 was malformed.
+[2021-09-29T17:08:37.260] [WARN] bank - Transaction of One Cheeseburger from Ben B to Sam N was malformed and was written to the error list. Attempting analysis..
+[2021-09-29T17:08:37.260] [INFO] bank - amount: One Cheeseburger
+
+[2021-09-29T17:08:37.260] [WARN] bank - Transaction of 5.42 from Sarah T to Dan W was malformed and was written to the error list. Attempting analysis..
+[2021-09-29T17:08:37.260] [INFO] bank - date: Last Thursday
+
+[2021-09-29T17:08:37.261] [DEBUG] commandHandler - -= INSTANCE END =-
+
+
+[2021-09-30T10:01:47.827] [DEBUG] commandHandler - Hello, World! Logger has intialised
+[2021-09-30T10:01:47.830] [DEBUG] parsing - Attempting to read Transactions2014.csv as a CSV file
+[2021-09-30T10:01:47.830] [DEBUG] parsing - Reading..
+[2021-09-30T10:01:47.857] [DEBUG] parsing - Read complete! (27ms)
+[2021-09-30T10:01:47.858] [DEBUG] parsing - Received 149 lines
+[2021-09-30T10:01:47.858] [DEBUG] parsing - Attempting to read DodgyTransactions2015.csv as a CSV file
+[2021-09-30T10:01:47.859] [DEBUG] parsing - Reading..
+[2021-09-30T10:01:47.864] [DEBUG] parsing - Read complete! (5ms)
+[2021-09-30T10:01:47.864] [DEBUG] parsing - Received 52 lines
+[2021-09-30T10:01:47.864] [DEBUG] parsing - Line 27 was malformed.
+[2021-09-30T10:01:47.864] [DEBUG] parsing - Line 51 was malformed.
+[2021-09-30T10:01:47.864] [WARN] bank - Transaction of One Cheeseburger from Ben B to Sam N was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T10:01:47.864] [INFO] bank - amount: One Cheeseburger
+
+[2021-09-30T10:01:47.864] [WARN] bank - Transaction of 5.42 from Sarah T to Dan W was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T10:01:47.864] [INFO] bank - date: Last Thursday
+
+[2021-09-30T10:01:47.866] [DEBUG] commandHandler - -= INSTANCE END =-
+
+
+[2021-09-30T10:01:50.763] [DEBUG] commandHandler - User input command "list"
+[2021-09-30T10:01:50.764] [DEBUG] commandHandler - Found parameters as list
+[2021-09-30T10:01:50.764] [DEBUG] commandHandler - Executing command..
+[2021-09-30T10:01:50.764] [DEBUG] commandHandler - Command execution complete (<1ms)
+[2021-09-30T10:01:54.073] [DEBUG] commandHandler - User input command "list all"
+[2021-09-30T10:01:54.073] [DEBUG] commandHandler - Found parameters as list,all
+[2021-09-30T10:01:54.073] [DEBUG] commandHandler - Executing command..
+[2021-09-30T10:01:54.074] [DEBUG] commandHandler - Command execution complete (1ms)
+[2021-09-30T10:02:13.401] [DEBUG] commandHandler - User input command "list errors"
+[2021-09-30T10:02:13.401] [DEBUG] commandHandler - Found parameters as list,errors
+[2021-09-30T10:02:13.401] [DEBUG] commandHandler - Executing command..
+[2021-09-30T10:02:13.401] [DEBUG] commandHandler - Command execution complete (<1ms)
+[2021-09-30T10:06:17.338] [DEBUG] commandHandler - Hello, World! Logger has intialised
+[2021-09-30T10:06:17.341] [DEBUG] parsing - Attempting to read Transactions2014.csv as a CSV file
+[2021-09-30T10:06:17.341] [DEBUG] parsing - Reading..
+[2021-09-30T10:06:17.341] [DEBUG] parsing - Read complete! (<1ms)
+[2021-09-30T10:06:17.342] [DEBUG] parsing - Received 149 lines
+[2021-09-30T10:06:17.342] [DEBUG] parsing - Attempting to read DodgyTransactions2015.csv as a CSV file
+[2021-09-30T10:06:17.342] [DEBUG] parsing - Reading..
+[2021-09-30T10:06:17.343] [DEBUG] parsing - Read complete! (1ms)
+[2021-09-30T10:06:17.343] [DEBUG] parsing - Received 52 lines
+[2021-09-30T10:06:17.343] [DEBUG] parsing - Line 27 was malformed.
+[2021-09-30T10:06:17.343] [DEBUG] parsing - Line 51 was malformed.
+[2021-09-30T10:06:17.343] [WARN] bank - Transaction of One Cheeseburger from Ben B to Sam N was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T10:06:17.343] [INFO] bank - amount: One Cheeseburger
+
+[2021-09-30T10:06:17.343] [WARN] bank - Transaction of 5.42 from Sarah T to Dan W was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T10:06:17.343] [INFO] bank - date: Last Thursday
+
+[2021-09-30T10:06:17.345] [DEBUG] commandHandler - -= INSTANCE END =-
+
+
+[2021-09-30T10:06:19.746] [DEBUG] commandHandler - User input command "list errors"
+[2021-09-30T10:06:19.747] [DEBUG] commandHandler - Found parameters as list,errors
+[2021-09-30T10:06:19.747] [DEBUG] commandHandler - Executing command..
+[2021-09-30T10:06:19.747] [DEBUG] commandHandler - Command execution complete (<1ms)
