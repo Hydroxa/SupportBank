@@ -56,6 +56,7 @@ class Bank {
 		console.log("Loading transactions..");
 
 		let transactionCount = 0;
+		let malformedCount = 0;
 		try {
 			for (let fileIdx = 0; fileIdx < files.length; fileIdx++) {
 				try {
@@ -74,9 +75,10 @@ class Bank {
 						logs.warn(`Attempted to load an unsupported file extension at "${filePath}"`);
 						continue;
 					}
-					for (let i = 0; i < transactions.length; i++) {
-						this.createUsersFromTransaction(transactions[i]);
-						this.doTransaction(transactions[i]);
+					for (const transaction of transactions) {
+						this.createUsersFromTransaction(transaction);
+						this.doTransaction(transaction);
+						if (transaction instanceof MalformedTransaction) ++malformedCount;
 					}
 					transactionCount += transactions.length;
 				} catch (err) {
@@ -99,7 +101,10 @@ class Bank {
 			logs.error(LogFormats.formatError(err, "Fatal error when loading transactions", errorContext));
 		}
 
-		return transactionCount;
+		return {
+			transactions: transactionCount,
+			malformed: malformedCount,
+		};
 	}
 }
 module.exports = Bank;

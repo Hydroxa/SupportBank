@@ -9,13 +9,15 @@ class Transaction {
 			this.to = properties[2];
 			this.reason = properties[3];
 			this.amount = Number(properties[4]);
-		} else {
-			const json = obj;
+		} else if (obj.type === "JSON") {
+			const json = obj.packed;
 			this.date = new Date(json["Date"]);
 			this.from = json["FromAccount"];
 			this.to = json["ToAccount"];
 			this.reason = json["Narrative"];
 			this.amount = Number(json["Amount"]);
+		} else if (obj.type === "XML") {
+			//Leaving blank because all fields are undefined. XMLParser constructs transactions piece by piece
 		}
 	}
 

@@ -36,7 +36,8 @@ function getDateAndTime() {
 }
 
 function commandHandler(transactionCount) {
-	if (typeof transactionCount === "number") console.log(`Loaded ${transactionCount} transactions`);
+	if (typeof transactionCount === "object")
+		console.log(`Loaded ${transactionCount.transactions} transactions${transactionCount.malformed > 0 ? ` (${transactionCount.malformed} are malformed!!)` : ""}`);
 
 	readline.question("> ", (cmdInput) => {
 		logs.debug(`User input command "${cmdInput}"`);

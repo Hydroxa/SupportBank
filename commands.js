@@ -76,7 +76,7 @@ class HelperMethods {
 					transaction.from,
 					transaction.to,
 					transaction.reason,
-					transaction.from == account.name ? (-transaction.amount).toFixed(2) : transaction.amount.toFixed(2),
+					transaction.from == "£" + (account.name ? (-transaction.amount).toFixed(2) : transaction.amount.toFixed(2)),
 				];
 			});
 
@@ -106,7 +106,7 @@ class HelperMethods {
 		}
 
 		printTable(["Name", "Balance"], names, (item) => {
-			return [bank.accounts[item].name, bank.accounts[item].balance.toFixed(2)];
+			return [bank.accounts[item].name, "£" + bank.accounts[item].balance.toFixed(2)];
 		});
 	}
 

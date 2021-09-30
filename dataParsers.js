@@ -3,6 +3,7 @@ const fs = require("fs");
 const MalformedTransaction = require("./cMalformedTransaction");
 const logs = require("log4js").getLogger("parsing");
 const LogFormats = require("./cLogFormats");
+const XMLParse = require("fast-xml-parser");
 
 class CSVParser {
 	static parseTransactionsFromFile(filePath) {
@@ -37,6 +38,7 @@ class CSVParser {
 		} catch (err) {
 			console.error("Could not read the file! Check .\\logs\\debug.logs for details");
 			logs.error(LogFormats.formatError(err, "Failed to read file!"));
+			return "";
 		}
 	}
 
@@ -68,7 +70,54 @@ class JSONParser {
 	}
 }
 
-class XMLParser {}
+class XMLParser {
+	static parseTransactionsFromFile(filePath) {
+		logs.warn("XML Parsing is not fully implemented yet! This call will result in an error");
+
+		let transactions = [];
+		try {
+			const transactionFileLines = this.readTransactionFileLines(filePath);
+
+			let transactionBuilding = false;
+			let transaction;
+			for (let i = 0; i < transactionFileLines.length; i++) {
+				const line = transactionFileLines[i];
+				if (!line.contains("TransactionLine")) {
+					if (line.contains("<SupportTransaction")) {
+						if (transactionBuilding) throw Error(`Incomplete Transaction. Expected end at line ${i + 1}`);
+						else transactionBuilding = true;
+
+						transaction = new Transaction({ type: "XML" });
+					}
+				}
+			}
+		} catch (err) {
+			console.error("Could not read the file! Check .\\logs\\debug.logs for details");
+			logs.error(LogFormats.formatError(err, "Failed to read file!"));
+			return transactions;
+		}
+	}
+
+	static readTransactionFileLines(filePath) {
+		try {
+			logs.debug("Reading..");
+			const now = Date.now();
+			const rawTransactionFile = fs.readFileSync(filePath, "utf8");
+			logs.debug(`Read complete! (${Date.now() - now < 1 ? "<1" : Date.now() - now}ms)`);
+			const rawTransactionsText = this.removeHeader(rawTransactionFile.split("\n"));
+			return rawTransactionsText;
+		} catch (err) {
+			console.error("Could not read the file! Check .\\logs\\debug.logs for details");
+			logs.error(LogFormats.formatError(err, "Failed to read file!"));
+			return [];
+		}
+	}
+
+	static removeHeader(rawTransactionList) {
+		rawTransactionList.shift();
+		return rawTransactionList;
+	}
+}
 
 module.exports = {
 	CSVParser: CSVParser,
