@@ -9,9 +9,10 @@ class MalformedTransaction {
 			this.reason = properties[3];
 			this.amount = properties[4];
 		} else {
+			const json = obj;
 			this.date = json["Date"];
-			this.from = json["From"];
-			this.to = json["To"];
+			this.from = json["FromAccount"];
+			this.to = json["ToAccount"];
 			this.reason = json["Narrative"];
 			this.amount = json["Amount"];
 		}
