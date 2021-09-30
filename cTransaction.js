@@ -8,15 +8,19 @@ class Transaction {
 			this.from = properties[1];
 			this.to = properties[2];
 			this.reason = properties[3];
-			this.amount = parseFloat(properties[4]);
+			this.amount = Number(properties[4]);
 		} else {
 			const json = obj;
 			this.date = new Date(json["Date"]);
-			this.from = json["From"];
-			this.to = json["To"];
+			this.from = json["FromAccount"];
+			this.to = json["ToAccount"];
 			this.reason = json["Narrative"];
-			this.amount = parseFloat(json["Amount"]);
+			this.amount = Number(json["Amount"]);
 		}
+	}
+
+	isMalformed() {
+		return isNaN(this.date.getTime()) || isNaN(this.amount) || typeof this.from !== "string" || typeof this.to !== "string" || typeof this.reason !== "string";
 	}
 }
 module.exports = Transaction;

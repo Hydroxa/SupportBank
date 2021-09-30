@@ -1,14 +1,34 @@
 const Command = require("./cCommand");
 const printTable = require("./printTable");
+const logs = require("log4js").getLogger("commands");
 
 const validCommands = {
 	setBank: setBank,
 	list: new Command(list, "Lists details about an account. Run without parameters for usage"),
 	help: new Command(help, "Displays this message!"),
+	import: new Command(importFile, "Imports the file provided"),
 };
 module.exports = validCommands;
 
 let bank;
+
+function setBank(bankArg) {
+	bank = bankArg;
+}
+
+function importFile(args) {
+	const fileName = args.join(" ");
+	const fs = require("fs");
+	if (fs.existsSync(fileName)) {
+		logs.debug("File existed");
+		let transactionsImportedAmt = bank.loadTransactionsFromFiles([fileName]);
+		console.log(`Imported ${transactionsImportedAmt} transactions`);
+		logs.info(`Imported ${transactionsImportedAmt} transactions`);
+	} else {
+		console.log("Cannot import: Could not find file. Did you make a typo?");
+		logs.warn("File did not exist");
+	}
+}
 
 function help() {
 	console.log("-=≡[ Valid Commands ]≡=-");
@@ -18,10 +38,6 @@ function help() {
 		}
 	}
 	console.log("-=≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡=-");
-}
-
-function setBank(bankArg) {
-	bank = bankArg;
 }
 
 function list(args) {
@@ -89,7 +105,7 @@ class HelperMethods {
 			names.push(name);
 		}
 
-		printTable(["Name", "Balance", "Errors"], names, (item) => {
+		printTable(["Name", "Balance"], names, (item) => {
 			return [bank.accounts[item].name, bank.accounts[item].balance.toFixed(2)];
 		});
 	}
@@ -100,7 +116,7 @@ class HelperMethods {
 			names.push(name);
 		}
 
-		printTable(["Name", "Balance", "Errors"], names, (item) => {
+		printTable(["Name", "Errors"], names, (item) => {
 			return [bank.accounts[item].name, bank.accounts[item].errors.length.toString()];
 		});
 	}

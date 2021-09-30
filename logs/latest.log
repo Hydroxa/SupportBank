@@ -1,0 +1,43 @@
+[2021-09-30T12:46:17.181] [DEBUG] commandHandler - Hello, World! Logger has intialised
+[2021-09-30T12:46:17.182] [DEBUG] commandHandler - Discovered files in folder: ./Transactions//DodgyTransactions2015.csv,./Transactions//Transactions2013.json,./Transactions//Transactions2014.csv
+[2021-09-30T12:46:17.183] [INFO] bank - Loading transaction file "./Transactions//DodgyTransactions2015.csv"
+[2021-09-30T12:46:17.183] [DEBUG] parsing - Attempting to read ./Transactions//DodgyTransactions2015.csv as a CSV file
+[2021-09-30T12:46:17.183] [DEBUG] parsing - Reading..
+[2021-09-30T12:46:17.184] [DEBUG] parsing - Read complete! (1ms)
+[2021-09-30T12:46:17.184] [DEBUG] parsing - Received 52 lines
+[2021-09-30T12:46:17.184] [DEBUG] parsing - Line 27 was malformed.
+[2021-09-30T12:46:17.184] [DEBUG] parsing - Line 51 was malformed.
+[2021-09-30T12:46:17.184] [WARN] bank - Transaction of One Cheeseburger from Ben B to Sam N was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T12:46:17.185] [INFO] bank - Malformed parts discovered: 
+		amount: One Cheeseburger
+
+[2021-09-30T12:46:17.185] [WARN] bank - Transaction of 5.42 from Sarah T to Dan W was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T12:46:17.185] [INFO] bank - Malformed parts discovered: 
+		date: Last Thursday
+
+[2021-09-30T12:46:17.185] [INFO] bank - Loading transaction file "./Transactions//Transactions2013.json"
+[2021-09-30T12:46:17.185] [DEBUG] parsing - Object 146 was malformed.
+[2021-09-30T12:46:17.186] [ERROR] bank - -= Exception =-
+Failed to load transactions from "./Transactions//Transactions2013.json"
+(undefined) : "json is not defined"
+
+-=Stack Trace =-
+ReferenceError: json is not defined
+    at new MalformedTransaction (D:\Program Source Code\BootCamp\SupportBank\cMalformedTransaction.js:12:16)
+    at Function.parseTransactionsFromFile (D:\Program Source Code\BootCamp\SupportBank\dataParsers.js:62:19)
+    at Bank.loadTransactionsFromFiles (D:\Program Source Code\BootCamp\SupportBank\cBank.js:69:41)
+    at Object.<anonymous> (D:\Program Source Code\BootCamp\SupportBank\supportBank.js:75:21)
+    at Module._compile (internal/modules/cjs/loader.js:1072:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1101:10)
+    at Module.load (internal/modules/cjs/loader.js:937:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:778:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)
+    at internal/main/run_main_module.js:17:47
+
+ -= Value Dump = -
+[object Object]
+[2021-09-30T12:46:17.186] [INFO] bank - Loading transaction file "./Transactions//Transactions2014.csv"
+[2021-09-30T12:46:17.186] [DEBUG] parsing - Attempting to read ./Transactions//Transactions2014.csv as a CSV file
+[2021-09-30T12:46:17.186] [DEBUG] parsing - Reading..
+[2021-09-30T12:46:17.186] [DEBUG] parsing - Read complete! (<1ms)
+[2021-09-30T12:46:17.186] [DEBUG] parsing - Received 149 lines

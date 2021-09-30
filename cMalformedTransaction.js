@@ -26,8 +26,20 @@ class MalformedTransaction {
 			errors.push("date");
 		}
 
-		if (isNaN(parseFloat(this.amount))) {
+		if (isNaN(Number(this.amount))) {
 			errors.push("amount");
+		}
+
+		if (typeof this.from !== "string") {
+			errors.push("from");
+		}
+
+		if (typeof this.to !== "string") {
+			errors.push("to");
+		}
+
+		if (typeof this.reason !== "string") {
+			errors.push("reason");
 		}
 
 		return errors;
@@ -36,9 +48,9 @@ class MalformedTransaction {
 	getMalformationAnalysis() {
 		try {
 			const malformed = this.getMalformedParts();
-			let output = "";
-			for (let i = 0; i < malformed.length; i++) {
-				output = `${malformed[i]}: ${this[malformed[i]]}\n`;
+			let output = "Malformed parts discovered: \n";
+			for (const property of malformed) {
+				output += `\t\t${property}: ${this[property]}\n`;
 			}
 			return {
 				success: true,
@@ -47,7 +59,7 @@ class MalformedTransaction {
 		} catch (err) {
 			return {
 				success: false,
-				message: `Analysis failed - ${err}`,
+				message: err,
 			};
 		}
 	}

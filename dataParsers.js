@@ -2,6 +2,7 @@ const Transaction = require("./cTransaction");
 const fs = require("fs");
 const MalformedTransaction = require("./cMalformedTransaction");
 const logs = require("log4js").getLogger("parsing");
+const LogFormats = require("./cLogFormats");
 
 class CSVParser {
 	static parseTransactionsFromFile(filePath) {
@@ -16,7 +17,7 @@ class CSVParser {
 			const transactionText = rawTransactionsLines[i];
 			let transaction = new Transaction(transactionText);
 
-			if (isNaN(transaction.date.getTime()) || isNaN(transaction.amount)) {
+			if (transaction.isMalformed()) {
 				logs.debug(`Line ${i + 1} was malformed.`);
 				transaction = new MalformedTransaction(transactionText);
 			}
@@ -35,7 +36,7 @@ class CSVParser {
 			return rawTransactionsText;
 		} catch (err) {
 			console.error("Could not read the file! Check .\\logs\\debug.logs for details");
-			logs.debug(`Failed to read file!\n${err}`);
+			logs.error(LogFormats.formatError(err, "Failed to read file!"));
 		}
 	}
 
@@ -45,7 +46,27 @@ class CSVParser {
 	}
 }
 
-class JSONParser {}
+class JSONParser {
+	static parseTransactionsFromFile(filePath) {
+		const rawTransactionsFile = fs.readFileSync(filePath, "utf8");
+		const jsonTransactionsFile = JSON.parse(rawTransactionsFile);
+		const transactions = [];
+		for (let i = 0; i < jsonTransactionsFile.length; i++) {
+			if (jsonTransactionsFile[i].length === 0) continue;
+
+			const transactionObject = jsonTransactionsFile[i];
+			let transaction = new Transaction(transactionObject);
+
+			if (transaction.isMalformed()) {
+				logs.debug(`Object ${i + 1} was malformed.`);
+				transaction = new MalformedTransaction(transactionObject);
+			}
+			transactions.push(transaction);
+		}
+
+		return transactions;
+	}
+}
 
 class XMLParser {}
 

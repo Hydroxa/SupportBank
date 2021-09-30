@@ -2,6 +2,7 @@ const Account = require("./cAccount");
 const MalformedTransaction = require("./cMalformedTransaction");
 const Parsers = require("./dataParsers");
 const logs = require("log4js").getLogger("bank");
+const LogFormats = require("./cLogFormats");
 
 class Bank {
 	constructor() {
@@ -24,8 +25,13 @@ class Bank {
 				const result = transaction.getMalformationAnalysis();
 
 				if (result.success) logs.info(result.message);
-				else logs.error(result.message);
-
+				else {
+					const errorContext = {
+						Transaction: transaction,
+						AnalysisResult: result,
+					};
+					logs.error(LogFormats.formatError(result.message, "Could not analyse malformation of the transaction", errorContext));
+				}
 				this.accounts[transaction.from.toLowerCase()].errors.push(transaction);
 				this.accounts[transaction.to.toLowerCase()].errors.push(transaction);
 			} else {
@@ -46,29 +52,54 @@ class Bank {
 		}
 	}
 
-	loadTransactionsFromFiles(files, callback) {
+	loadTransactionsFromFiles(files) {
 		console.log("Loading transactions..");
 
-		let transactionLength = 0;
+		let transactionCount = 0;
 		try {
 			for (let fileIdx = 0; fileIdx < files.length; fileIdx++) {
-				const filePath = files[fileIdx];
-				console.log("Loading " + filePath);
-				let transactions = [];
-				if (filePath.endsWith(".csv")) {
-					transactions = Parsers.CSVParser.parseTransactionsFromFile(filePath);
-				}
-				transactionLength += transactions.length;
-				for (let i = 0; i < transactions.length; i++) {
-					this.createUsersFromTransaction(transactions[i]);
-					this.doTransaction(transactions[i]);
+				try {
+					var filePath = files[fileIdx];
+					console.log("Loading " + filePath);
+					logs.info(`Loading transaction file "${filePath}"`);
+					var transactions = [];
+					if (filePath.endsWith(".csv")) {
+						transactions = Parsers.CSVParser.parseTransactionsFromFile(filePath);
+					} else if (filePath.endsWith(".json")) {
+						transactions = Parsers.JSONParser.parseTransactionsFromFile(filePath);
+					} else if (filePath.endsWith(".xml")) {
+						transactions = Parsers.XMLParser.parseTransactionsFromFile(filePath);
+					} else {
+						console.log(`The file type of ${filePath} is not supported`);
+						logs.warn(`Attempted to load an unsupported file extension at "${filePath}"`);
+						continue;
+					}
+					for (let i = 0; i < transactions.length; i++) {
+						this.createUsersFromTransaction(transactions[i]);
+						this.doTransaction(transactions[i]);
+					}
+					transactionCount += transactions.length;
+				} catch (err) {
+					console.warn(`Failed to load transactions from "${filePath}". Check latest.log for details`);
+					const errorContext = {
+						Current_FilePath: filePath,
+						Transactions: transactions,
+						FilesPaths: files,
+					};
+					logs.error(LogFormats.formatError(err, `Failed to load transactions from "${filePath}"`, errorContext));
 				}
 			}
 		} catch (err) {
-			console.error(err);
-		} finally {
-			callback(transactionLength);
+			console.error(`Fatal error when loading transactions from files. Retained ${transactionCount} transactions`);
+			const errorContext = {
+				Current_FilePath: filePath,
+				Transactions: transactions,
+				FilesPaths: files,
+			};
+			logs.error(LogFormats.formatError(err, "Fatal error when loading transactions", errorContext));
 		}
+
+		return transactionCount;
 	}
 }
 module.exports = Bank;

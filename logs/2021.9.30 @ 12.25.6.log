@@ -1,0 +1,26 @@
+[2021-09-30T12:24:23.292] [DEBUG] commandHandler - Hello, World! Logger has intialised
+[2021-09-30T12:24:23.293] [DEBUG] commandHandler - Discovered files in folder: ./Transactions//DodgyTransactions2015.csv,./Transactions//Transactions2013.json,./Transactions//Transactions2014.csv
+[2021-09-30T12:24:23.294] [INFO] bank - Loading transaction file "./Transactions//DodgyTransactions2015.csv"
+[2021-09-30T12:24:23.294] [DEBUG] parsing - Attempting to read ./Transactions//DodgyTransactions2015.csv as a CSV file
+[2021-09-30T12:24:23.294] [DEBUG] parsing - Reading..
+[2021-09-30T12:24:23.294] [DEBUG] parsing - Read complete! (<1ms)
+[2021-09-30T12:24:23.294] [DEBUG] parsing - Received 52 lines
+[2021-09-30T12:24:23.295] [DEBUG] parsing - Line 27 was malformed.
+[2021-09-30T12:24:23.295] [DEBUG] parsing - Line 51 was malformed.
+[2021-09-30T12:24:23.295] [WARN] bank - Transaction of One Cheeseburger from Ben B to Sam N was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T12:24:23.295] [INFO] bank - Malformed parts discovered: 
+		amount: One Cheeseburger
+
+[2021-09-30T12:24:23.295] [WARN] bank - Transaction of 5.42 from Sarah T to Dan W was malformed and was written to the error list. Attempting analysis..
+[2021-09-30T12:24:23.295] [INFO] bank - Malformed parts discovered: 
+		date: Last Thursday
+
+[2021-09-30T12:24:23.295] [INFO] bank - Loading transaction file "./Transactions//Transactions2013.json"
+[2021-09-30T12:24:23.296] [INFO] bank - Loading transaction file "./Transactions//Transactions2014.csv"
+[2021-09-30T12:24:23.296] [DEBUG] parsing - Attempting to read ./Transactions//Transactions2014.csv as a CSV file
+[2021-09-30T12:24:23.296] [DEBUG] parsing - Reading..
+[2021-09-30T12:24:23.296] [DEBUG] parsing - Read complete! (<1ms)
+[2021-09-30T12:24:23.296] [DEBUG] parsing - Received 149 lines
+[2021-09-30T12:25:05.961] [DEBUG] commandHandler - -= INSTANCE END =-
+
+

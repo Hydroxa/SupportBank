@@ -22,8 +22,8 @@ function getBody(items, itemFunc, columnWidths, segments) {
 	const verticalSegment = segments.verticalSegment;
 
 	let output = "";
-	for (let i = 0; i < items.length; i++) {
-		const displayItems = itemFunc(items[i]);
+	for (const item of items) {
+		const displayItems = itemFunc(item);
 		output += verticalSegment;
 		for (let o = 0; o < displayItems.length; o++) {
 			output += displayItems[o].padEnd(columnWidths[o] + 1) + verticalSegment;
@@ -57,8 +57,8 @@ function getHeader(fields, columnWidths, segments) {
 function getColumnWidths(items, fields, itemFunc) {
 	const columnWidths = [];
 
-	for (let i = 0; i < items.length; i++) {
-		const displayItems = itemFunc(items[i]);
+	for (const item of items) {
+		const displayItems = itemFunc(item);
 		for (let o = 0; o < displayItems.length; o++) {
 			if (columnWidths.length < o + 1 || columnWidths[o] < displayItems[o].length) {
 				columnWidths[o] = displayItems[o].length;
